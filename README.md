@@ -1,1 +1,1 @@
-# querying-lab
+# DjangoQueryingLab_PY_Starter
