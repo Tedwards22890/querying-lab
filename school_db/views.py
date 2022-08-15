@@ -150,16 +150,15 @@ SELECT `school_db_instructor`.`id`,
 # (Do not hard code his name in the print)
 def problem_three(request):
 
-  instructors = Instructor.objects.filter(id=2)
-  courses = Course.objects.filter(instructor=2)
+  instructor = Instructor.objects.get(pk=2)
+  courses = Course.objects.filter(instructor_id=2)
 
-  for instructor in instructors:
-    print(f"{instructor.first_name} {instructor.last_name}:")
+  print(f"{instructor.first_name} {instructor.last_name}:")
   print("Courses:")
   for course in courses:
-    print(f"{course.name}")
+    print(f"    - {course.name}")
 
-    return complete(request)
+  return complete(request)
 
 
 # Supporting Query Method Documentation:
@@ -292,8 +291,11 @@ VALUES ('Kyle', 'Harwood', 2022, 3.0)
 # Print the new student's id, full name, and gpa to the terminal
 def problem_six(request):
 
-    # Make sure to set this equal to the primary key of the row you just created!
-    student_id = 11
+    student_id = 12
+    Student.objects.filter(pk=student_id).update(gpa=3.7)
+    student = Student.objects.get(pk=student_id)
+    print(f"ID: {student.id} \nName {student.first_name} {student.last_name}\nGPA: {student.gpa}")
+
 
     return complete(request)
 
@@ -340,7 +342,7 @@ LIMIT 21
 def problem_seven(request):
 
     # Make sure to set this equal to the primary key of the row you just created!
-    student_id = 11
+    student_id = 12
     Student.objects.filter(pk=student_id).delete()
 
     try:
